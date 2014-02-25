@@ -68,7 +68,7 @@ INSTALLED_APPS = (
     'compressor',
     # Custom Apps
     'blog',
-    'family_tree',
+    'genealogy',
 )
 
 MIDDLEWARE_CLASSES = (
