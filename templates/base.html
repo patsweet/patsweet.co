@@ -1,0 +1,95 @@
+{% load staticfiles %}
+{% load compress %}
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>patsweet.co {% block title %}{% endblock title %}</title>
+        {% block opengraph %}
+
+        {% endblock opengraph %}
+        {% compress css %}
+            <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+            <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+        {% endcompress %}
+        {% block extrastyles %}
+
+        {% endblock extrastyles %}
+        <script src="{% static "js/vendor/modernizr.js" %}"></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '{{ FACEBOOK_APP_ID }}',
+                    status     : true,
+                    xfbml      : true
+                });
+            };
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all/debug.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="contain-to-grid sticky">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="{% url 'home' %}">Patrick Sweet</a></h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+                </ul>
+                <section class="top-bar-section">
+                    <!-- Right Nav Section -->
+                    <ul class="right">
+                        <li><a href="{% url 'blog' %}">blog</a></li>
+                        <li><a href="{% url 'about' %}">about</a></li>
+                        <li><a href="#">contact</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </div>
+        <br>
+        {% block maincontent %}
+
+        {% endblock maincontent %}
+        <footer class="row">
+            <hr>
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <p class="right">
+                            &copy; Patrick Sweet 2014
+                        </p>
+                        <p>
+                            <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
+                        </p>
+                    </div>
+                    <div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li><a href="{% url 'blog' %}">blog</a></li>
+                            <li><a href="{% url 'about' %}">about</a></li>
+                            <li><a href="#">contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% compress js%}
+        <script src="{% static "js/vendor/jquery.js" %}"></script>
+        <script src="{% static "js/foundation.min.js" %}"></script>
+        <script>
+            $(document).foundation();
+        </script>
+        {% endcompress %}
+        {% block extrajs %}
+
+        {% endblock extrajs %}
+    </body>
+</html>

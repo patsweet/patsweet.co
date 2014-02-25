@@ -1,0 +1,44 @@
+{% for post in posts %}
+<div class="row" data-equalizer>
+    <div class="large-3 columns" style="background:#d4d4d4;" data-equalizer-watch>
+        <span class="label">{{ post.pub_date }}</span>
+        {% if post.category %}
+        <p>
+            <a href="{% url 'category-detail' slug=post.category.slug pk=post.category.pk %}"><span class="label secondary">{{ post.category.title }}</span></a>
+        </p>
+        {% endif %}
+        <p>
+            <a href="{{ BASE_URL }}{% url 'post-detail' slug=post.slug pk=post.pk %}#comments">
+                <fb:comments-count href={{ BASE_URL }}{% url 'post-detail' slug=post.slug pk=post.pk %}>0</fb:comments-count> comments
+            </a>
+        </p>
+    </div>
+    <div class="large-9 columns" data-equalizer-watch>
+        <div class="article">
+                <h2 style="line-height:1em"><a href="{% url 'post-detail' slug=post.slug pk=post.pk %}">{{ post.headline }}</a> </h2>
+                {{ post.body|safe|truncatewords_html:100 }}
+        </div>
+    </div>
+</div>
+<hr>
+{% empty %}
+    <h3>No posts</h3>
+{% endfor %}
+<br>
+<div class="pagination-centered">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="arrow"><a rel="prev" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+        {% for num in paginator.page_range %}
+            {% ifequal num page_obj.number %}
+                <li class="current"><a href="?page={{ num }}">{{ num }}</a></li>
+            {% else %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="arrow"><a rel="next" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</div>

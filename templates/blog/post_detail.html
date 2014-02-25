@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    | {{ post.headline|truncatewords:4 }}
+{% endblock title %}
+{% block opengraph %}
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ BASE_URL }}{% url 'post-detail' slug=post.slug pk=post.pk %}" />
+    <meta property="og:article:author" content="{{ post.author.get_full_name }}" />
+    <meta property="og:title" content="{{ post.headline }}" />
+{% endblock opengraph %}
+{% block maincontent %}
+<div class="row">
+    <div class="small-12 large-8 columns">
+        <div class="fb-like right" data-href="{{ BASE_URL }}{% url 'post-detail' slug=post.slug pk=post.pk %}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+        <span class="label">{{ post.pub_date }}</span>{% if post.category %}<a href="{% url 'category-detail' slug=post.category.slug pk=post.category.pk %}"><span class="label secondary">{{ post.category.title }}</span></a>{% endif %}
+        <h2>{{ post.headline }}</h2>
+        {{ post.body|safe}}
+        <hr>
+        <h3 id="comments">Comments</h3>
+        <div class="fb-comments" data-href="{{ BASE_URL }}{% url 'post-detail' slug=post.slug pk=post.pk %}" data-numposts="5" data-colorscheme="light"></div>
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}

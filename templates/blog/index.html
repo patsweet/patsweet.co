@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block extrastyles %}
+
+{% endblock extrastyles %}
+{% block maincontent %}
+<div class="row">
+    <div class="small-12 large-8 columns">
+        <h1>The web log</h1>
+        {% include 'blog/post_list.html' %}
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}

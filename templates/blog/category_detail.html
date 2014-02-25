@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block maincontent %}
+<div class="row">
+    <div class="small-12 large-8 columns">
+        <h2>{{ category.title }} posts</h2>
+        {% with posts=category.post_set.all %}
+            {% include 'blog/post_list.html' %}
+        {% endwith %}
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}
