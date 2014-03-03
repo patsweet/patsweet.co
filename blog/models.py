@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class PublishedPostManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedPostManager, self).get_queryset().filter(published=True).exclude(pub_date__gte=timezone.now())
+        return super(PublishedPostManager, self).get_queryset().filter(published=True).exclude(pub_date__gt=timezone.now())
 
 
 class Post(models.Model):
