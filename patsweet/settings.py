@@ -64,7 +64,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Third-party Apps
     'south',
-    'tinymce',
     'compressor',
     # Custom Apps
     'blog',
