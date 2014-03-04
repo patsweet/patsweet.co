@@ -28,6 +28,15 @@ GRAPPELLI_ADMIN_TITLE = "Patrick Sweet"
 
 FACEBOOK_APP_ID = "1447902265443157"
 
+REST_FRAMEWORK = {
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    'DEFAULT_PERMISISON_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split()
 
 ADMINS = (
@@ -65,6 +74,7 @@ INSTALLED_APPS = (
     # Third-party Apps
     'south',
     'compressor',
+    'rest_framework',
     # Custom Apps
     'blog',
     'genealogy',
