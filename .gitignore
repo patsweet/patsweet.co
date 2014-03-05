@@ -4,6 +4,8 @@
 # C extensions
 *.so
 
+*.sublime*
+
 # Packages
 *.egg
 *.egg-info
