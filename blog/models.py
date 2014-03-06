@@ -27,6 +27,10 @@ class Post(models.Model):
     def __unicode__(self):
         return self.headline
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('blog:post-detail', kwargs={'pk':self.id, 'slug': self.slug})
+
 
 class CategoryWithCountManager(models.Manager):
     def get_queryset(self):
@@ -45,3 +49,9 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('blog:category-detail', kwargs={'pk':self.id, 'slug': self.slug})
+
+

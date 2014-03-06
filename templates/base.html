@@ -41,14 +41,14 @@
             <nav class="top-bar" data-topbar>
                 <ul class="title-area">
                     <li class="name">
-                        <h1><a href="{% url 'home' %}">Patrick Sweet</a></h1>
+                        <h1><a href="{% url 'blog:home' %}">Patrick Sweet</a></h1>
                     </li>
                     <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
                 </ul>
                 <section class="top-bar-section">
                     <!-- Right Nav Section -->
                     <ul class="right">
-                        <li><a href="{% url 'blog' %}">blog</a></li>
+                        <li><a href="{% url 'blog:blog' %}">blog</a></li>
                         <li><a href="{% url 'about' %}">about</a></li>
                         <li><a href="#">contact</a></li>
                     </ul>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="large-6 columns">
                         <ul class="inline-list right">
-                            <li><a href="{% url 'blog' %}">blog</a></li>
+                            <li><a href="{% url 'blog:blog' %}">blog</a></li>
                             <li><a href="{% url 'about' %}">about</a></li>
                             <li><a href="#">contact</a></li>
                         </ul>

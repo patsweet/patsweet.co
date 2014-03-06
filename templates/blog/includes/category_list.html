@@ -2,7 +2,7 @@
 <ul class="no-bullet">
 {% for category in categories %}
     <li>
-        <a href="{% url 'category-detail' slug=category.slug pk=category.pk %}">{{ category.title }}</a> ({{ category.num_posts }})
+        <a href="{% url 'blog:category-detail' slug=category.slug pk=category.pk %}">{{ category.title }}</a> ({{ category.num_posts }})
     </li>
 {% empty %}
     <li>No categories</li>

@@ -1,7 +1,23 @@
 from django.views.generic import ListView, DetailView
+from rest_framework import viewsets
 from .models import Post, Category
-from django.utils import timezone
-import os
+from .serializers import PostSerializer, CategorySerializer
+
+
+class PostViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Post.published_posts.all()
+    serializer_class = PostSerializer
+
+
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Category.with_count.all()
+    serializer_class = CategorySerializer
 
 
 class HomePage(ListView):
