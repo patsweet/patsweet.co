@@ -4,18 +4,18 @@
         <span class="label">{{ post.pub_date }}</span>
         {% if post.category %}
         <p>
-            <a href="{% url 'blog:category-detail' slug=post.category.slug pk=post.category.pk %}"><span class="label secondary">{{ post.category.title }}</span></a>
+            <a href="{{ post.category.get_absolute_url }}"><span class="label secondary">{{ post.category.title }}</span></a>
         </p>
         {% endif %}
         <p>
-            <a href="{{ BASE_URL }}{% url 'blog:post-detail' slug=post.slug pk=post.pk %}#comments">
-                <fb:comments-count href={{ BASE_URL }}{% url 'blog:post-detail' slug=post.slug pk=post.pk %}>0</fb:comments-count> comments
+            <a href="{{ post.get_absolute_url }}#comments">
+                <fb:comments-count href={{ BASE_URL }}{{ post.get_absolute_url }}>0</fb:comments-count> comments
             </a>
         </p>
     </div>
     <div class="large-9 columns" data-equalizer-watch>
         <div class="article">
-                <h2 style="line-height:1em"><a href="{% url 'blog:post-detail' slug=post.slug pk=post.pk %}">{{ post.headline }}</a> </h2>
+                <h2 style="line-height:1em"><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a> </h2>
                 {{ post.body|safe|truncatewords_html:100 }}
         </div>
     </div>

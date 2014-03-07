@@ -54,4 +54,5 @@ class Category(models.Model):
         from django.core.urlresolvers import reverse
         return reverse('blog:category-detail', kwargs={'pk':self.id, 'slug': self.slug})
 
-
+    def published_posts(self):
+        return Post.published_posts.filter(category=self)
