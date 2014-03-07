@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class PublishedPostManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedPostManager, self).get_queryset().filter(published=True).exclude(pub_date__gt=timezone.now())
+        return super(PublishedPostManager, self).get_queryset().filter(published=True, pub_date__lte=timezone.now())
 
 
 class Post(models.Model):
@@ -34,7 +34,7 @@ class Post(models.Model):
 
 class CategoryWithCountManager(models.Manager):
     def get_queryset(self):
-        return super(CategoryWithCountManager, self).get_queryset().filter(post__published=True).annotate(num_posts=models.Count('post')).order_by('-num_posts')
+        return super(CategoryWithCountManager, self).get_queryset().filter(post__published=True, post__pub_date__lte=timezone.now()).annotate(num_posts=models.Count('post')).order_by('-num_posts')
 
 
 class Category(models.Model):
