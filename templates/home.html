@@ -22,9 +22,9 @@
                         {% if post.category %}
                             <span class="secondary label">{{ post.category.title }}</span>
                         {% endif %}
-                        <h4><a href="{% url 'blog:post-detail' slug=post.slug pk=post.pk %}">{{ post.headline }}</a></h4>
+                        <h4><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h4>
                         {{ post.body|safe|truncatewords_html:20 }}
-                        <a href="{% url 'blog:post-detail' slug=post.slug pk=post.pk %}">Read more</a>
+                        <a href="{{ post.get_absolute_url }}">Read more</a>
                     </div>
                 </li>
             {% endfor %}
