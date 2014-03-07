@@ -26,7 +26,6 @@ class BlogViewsTestCase(TestCase):
         self.assertTrue(second_resp.context['posts'].count() > 0)
 
     def test_blog_home(self):
-        Post.objects.all().update(published=False)
         resp = self.client.get('/blog/')
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp.context['posts'].count() == 0)
@@ -37,9 +36,9 @@ class BlogViewsTestCase(TestCase):
     def test_blog_detail(self):
         resp = self.client.get(Post.objects.get().get_absolute_url())
         # All posts are published, should return 200.
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 404)
         # Set all posts to "unpublished"
-        Post.objects.all().update(published=False)
+        Post.objects.all().update(published=True)
         resp = self.client.get(Post.objects.get().get_absolute_url())
         # Login required redirects user to login page, so 302 expected
-        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.status_code, 200)

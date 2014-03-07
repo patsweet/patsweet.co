@@ -54,6 +54,13 @@ class PostDetail(DetailView):
     context_object_name = "post"
     model = Post
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            queryset = Post.objects.all()
+        else:
+            queryset = Post.published_posts.all()
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
         context['categories'] = Category.with_count.all()
