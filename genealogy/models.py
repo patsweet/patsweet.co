@@ -21,6 +21,7 @@ class FamilyMember(models.Model):
     maiden_name = models.CharField(max_length=50, blank=True, null=True)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     birthday = models.DateField(blank=True, null=True)
+    died_on = models.DateField(blank=True, null=True)
     mother = models.ForeignKey('self', blank=True, null=True, related_name='mother_to', limit_choices_to={'sex': 'f'})
     father = models.ForeignKey('self', blank=True, null=True, related_name='father_to', limit_choices_to={'sex': 'm'})
 
