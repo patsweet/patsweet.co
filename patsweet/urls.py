@@ -8,7 +8,7 @@ from blog.views import PostViewSet, CategoryViewSet
 admin.autodiscover()
 
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet)
 router.register(r'categories', CategoryViewSet)
 
