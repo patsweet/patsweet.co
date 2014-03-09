@@ -1,0 +1,42 @@
+.main-hero {
+    min-height: 400px;
+}
+.main-hero-content {
+    position: relative;
+    top: 10px;
+    bottom: 10px;
+    padding: 0 1% 5px 1%;
+    background-color: rgb(255,255,255);
+    background-color: rgba(255, 255, 255, 0.75);
+}
+.main-hero-content > h1 {
+    text-align: center;
+    font-weight: bold;
+}
+.main-hero-content > p {
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    font-size: 1.25em;
+    line-height: 1.2em;
+}
+.main-hero-content .headshot {
+    border: 3px solid #d4d4d4;
+    border-radius: 50%;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.footer-hero {
+    background-color: black;
+    color: white;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+.footer-hero > .inline-list > li {
+    margin-left: auto;
+    margin-right: auto;
+}

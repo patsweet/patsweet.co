@@ -1,18 +1,31 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block extrastyles %}
+{% endblock extrastyles %}
 {% block maincontent %}
-    <div class="row">
-        <div class="small-12 large-6 large-centered columns">
-            <div class="row">
-                <img class="small-12 large-8 small-centered large-centered columns end" src="https://pbs.twimg.com/profile_images/1789121344/325550_10150990382310006_696845005_21340812_1611502812_o.jpg" />
-            </div>
-            <div class="row">
-                <h1 class="text-center">Patrick Sweet</h1>
-            </div>
+    <div class="main-hero">
+        <div class="row main-hero-content">
+            <p>
+                <img class="headshot" src="{% static "img/headshot.jpg" %}" alt="">
+            </p>
+            <h1>
+                Patrick Sweet
+            </h1>
+            <p>
+                Welcome to my site. I'm a journalist and data geek, a Mizzou grad and Denver native.
+            </p>
+            <p>
+                I spend my days crunching data for The News Journal and trying to figure out how we can better tell stories for our readers.
+            </p>
+            <p>
+                Get in touch with me:
+                <br>
+                <a href="https://twitter.com/patsweet"><i class="fi-social-twitter"></i> Twitter</a> | <a href="http://www.linkedin.com/in/patsweet"> <i class="fi-social-linkedin"></i> LinkedIn</a> | <a href="https://www.facebook.com/patmsweet"> <i class="fi-social-facebook"></i> Facebook</a>
+            </p>
         </div>
     </div>
+
     <div class="row">
-        <hr>
         <h3>Latest blog posts</h3>
         <ul class="large-block-grid-3">
             {% for post in posts %}
@@ -36,4 +49,7 @@
 {% block extrajs %}
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js
 "></script>
+<script>
+    $(".main-hero").backstretch('{% static 'img/mountain-background.jpg' %}')
+</script>
 {% endblock extrajs %}

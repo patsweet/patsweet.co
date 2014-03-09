@@ -13,6 +13,8 @@
         {% compress css %}
             <link rel="stylesheet" href="{% static "css/normalize.css" %}">
             <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+            <link rel="stylesheet" href="{% static "css/foundation-icons/foundation-icons.css" %}">
+            <link rel="stylesheet" href="{% static "css/base.css" %}">
         {% endcompress %}
         {% block extrastyles %}
 
@@ -55,32 +57,32 @@
                 </section>
             </nav>
         </div>
-        <br>
         {% block maincontent %}
 
         {% endblock maincontent %}
-        <footer class="row">
-            <hr>
-            <div class="large-12 columns">
-                <div class="row">
-                    <div class="large-6 columns">
-                        <p class="right">
-                            &copy; Patrick Sweet 2014
-                        </p>
-                        <p>
-                            <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
-                        </p>
-                    </div>
-                    <div class="large-6 columns">
-                        <ul class="inline-list right">
-                            <li><a href="{% url 'blog:blog' %}">blog</a></li>
-                            <li><a href="{% url 'about' %}">about</a></li>
-                            <li><a href="#">contact</a></li>
-                        </ul>
+        <div class="footer-hero">
+            <footer class="row">
+                <div class="large-12 columns">
+                    <div class="row">
+                        <div class="large-4 columns">
+                            <p>
+                                &copy; Patrick Sweet 2014
+                            </p>
+                        </div>
+                        <div class="large-4 columns text-center">
+                            <p class="text=center">
+                                <a href="{% url 'blog:blog' %}">blog</a> | <a href="{% url 'about' %}">about</a> | <a href="#">contact</a>
+                            </p>
+                        </div>
+                        <div class="large-4 columns">
+                            <p class="right">
+                                <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
         {% compress js%}
         <script src="{% static "js/vendor/jquery.js" %}"></script>
         <script src="{% static "js/foundation.min.js" %}"></script>
