@@ -23,12 +23,16 @@
     font-size: 1.25em;
     line-height: 1.2em;
 }
+.main-hero-content .contact-links {
+     font-size:1.25em;
+     line-height: 0.9em;
+}
 .main-hero-content .headshot {
     border: 3px solid #d4d4d4;
     border-radius: 50%;
-    max-height: 25%;
     width: auto;
     height: auto;
+    max-height: 150px;
     margin-left: auto;
     margin-right: auto;
 }

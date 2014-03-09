@@ -9,11 +9,13 @@
     <meta property="og:title" content="{{ post.headline }}" />
 {% endblock opengraph %}
 {% block maincontent %}
+<br>
 <div class="row">
     <div class="small-12 large-8 columns">
+        <h1>{{ post.headline }}</h1>
         <div class="fb-like right" data-href="{{ BASE_URL }}{% url 'blog:post-detail' slug=post.slug pk=post.pk %}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
         <span class="label">{{ post.pub_date }}</span>{% if post.category %}<a href="{% url 'blog:category-detail' slug=post.category.slug pk=post.category.pk %}"><span class="label secondary">{{ post.category.title }}</span></a>{% endif %}
-        <h2>{{ post.headline }}</h2>
+        <hr>
         {{ post.body|safe}}
         <hr>
         <h3 id="comments">Comments</h3>

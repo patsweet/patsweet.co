@@ -5,44 +5,49 @@
 {% block maincontent %}
     <div class="main-hero">
         <div class="row main-hero-content">
-            <p class="text-center">
-                <img class="headshot" src="{% static "img/headshot.jpg" %}" alt="">
-            </p>
-            <h1>
-                Patrick Sweet
-            </h1>
-            <p>
-                Welcome to my site. I'm a journalist and data geek, a Mizzou grad and Denver native.
-            </p>
-            <p>
-                I spend my days crunching data for The News Journal and trying to figure out how we can better tell stories for our readers.
-            </p>
-            <p>
-                Get in touch with me:
-                <br>
-                <a href="https://twitter.com/patsweet"><i class="fi-social-twitter"></i> Twitter</a> | <a href="http://www.linkedin.com/in/patsweet"> <i class="fi-social-linkedin"></i> LinkedIn</a> | <a href="https://www.facebook.com/patmsweet"> <i class="fi-social-facebook"></i> Facebook</a>
-            </p>
+            <div class="small-12 large-6 large-centered columns">
+                <p class="text-center">
+                    <img class="headshot" src="{% static "img/headshot.jpg" %}" alt="">
+                </p>
+                <h1 class="text-center">
+                    Patrick Sweet
+                </h1>
+                <p>
+                    Welcome to my site. I'm a journalist and data geek, a Mizzou grad and Denver native.
+                </p>
+                <p>
+                    I spend my days crunching data for The News Journal and trying to figure out how we can better tell stories for our readers.
+                </p>
+                <p>
+                    Get in touch with me:
+                </p>
+                <p class="text-center contact-links">
+                    <a href="https://twitter.com/patsweet"><i class="fi-social-twitter"></i> Twitter</a> | <a href="http://www.linkedin.com/in/patsweet"> <i class="fi-social-linkedin"></i> LinkedIn</a> | <a href="https://www.facebook.com/patmsweet"> <i class="fi-social-facebook"></i> Facebook</a>
+                </p>
+            </div>
         </div>
     </div>
 
     <div class="row">
-        <h3>Latest blog posts</h3>
-        <ul class="large-block-grid-3">
-            {% for post in posts %}
-                <li>
-                    <div class="panel">
-                        <span class="label">{{ post.pub_date }}</span>
-                        {% if post.category %}
-                            <span class="secondary label">{{ post.category.title }}</span>
-                        {% endif %}
-                        <h4><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h4>
-                        {{ post.body|safe|truncatewords_html:20 }}
-                        <a href="{{ post.get_absolute_url }}">Read more</a>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-        <h4 class="right"><a href="{% url 'blog:blog' %}">More blog posts</a></h4>
+        <div class="small-12 columns">
+            <h3>Latest blog posts</h3>
+            <ul class="large-block-grid-3 small-12 columns">
+                {% for post in posts %}
+                    <li>
+                        <div class="panel">
+                            <span class="label">{{ post.pub_date }}</span>
+                            {% if post.category %}
+                                <span class="secondary label">{{ post.category.title }}</span>
+                            {% endif %}
+                            <h4><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h4>
+                            {{ post.body|safe|truncatewords_html:20 }}
+                            <a href="{{ post.get_absolute_url }}">Read more</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h4 class="right"><a href="{% url 'blog:blog' %}">More blog posts</a></h4>
+        </div>
     </div>
 {% endblock maincontent %}
 
