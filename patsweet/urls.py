@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='home'),
     url(r'^blog/', include('blog.urls')),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name="about"),
-    url(r'^contact/$', include('contact_form.urls')),
+    url(r'^contact/', include('contact_form.urls')),
     # Family Tree Project
     url(r'^family/', include('genealogy.urls')),
 

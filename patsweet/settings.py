@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DEBUG', False))
+DEBUG = True # bool(os.environ.get('DEBUG', False))
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -42,7 +42,7 @@ REST_FRAMEWORK = {
 ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split()
 
 ADMINS = (
-    'Patrick Sweet', 'patmsweet@gmail.com',
+   ('Patrick Sweet', 'patmsweet@gmail.com'),
 )
 MANAGERS = ADMINS
 # Templates
