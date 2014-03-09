@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<br>
+<div class="row" style="min-height: 85%;">
+    <div class="small-12 large-8 columns">
+        <h1>Contact Me</h1>
+        <form action="." method="post">{% csrf_token %}
+            {{ form}}
+            <input type="submit" value="Send">
+        </form>
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}

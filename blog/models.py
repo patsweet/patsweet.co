@@ -29,7 +29,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('blog:post-detail', kwargs={'pk':self.id, 'slug': self.slug})
+        return reverse('blog-post-detail', kwargs={'pk':self.id, 'slug': self.slug})
 
 
 class CategoryWithCountManager(models.Manager):
@@ -52,7 +52,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('blog:category-detail', kwargs={'pk':self.id, 'slug': self.slug})
+        return reverse('blog-category-detail', kwargs={'pk':self.id, 'slug': self.slug})
 
     def published_posts(self):
         return Post.published_posts.filter(category=self)

@@ -2,28 +2,23 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from filebrowser.sites import site
-from rest_framework.routers import DefaultRouter
-from blog.views import PostViewSet, CategoryViewSet
-from genealogy.views import FamilyMemberViewSet
+from blog.views import HomePage
 
 admin.autodiscover()
 
-
-router = DefaultRouter(trailing_slash=False)
-router.register(r'posts', PostViewSet)
-router.register(r'categories', CategoryViewSet)
-
-genealogy_router = DefaultRouter(trailing_slash=False)
-genealogy_router.register(r'member', FamilyMemberViewSet)
-
 urlpatterns = patterns('',
+    # ADMIN and FILEBROWSER
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    # API Auth
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^', include('blog.urls', namespace="blog")),
-    url(r'^api/', include(router.urls)),
-    url(r'^family/api/', include(genealogy_router.urls)),
+    # Main Site
+    url(r'^$', HomePage.as_view(), name='home'),
+    url(r'^blog/', include('blog.urls')),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name="about"),
+    url(r'^contact/$', include('contact_form.urls')),
+    # Family Tree Project
+    url(r'^family/', include('genealogy.urls')),
 
 )

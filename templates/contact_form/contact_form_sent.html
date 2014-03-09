@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<br>
+<div class="row" style="min-height: 85%;">
+    <div class="small-12 large-8 columns">
+        <h1>Thanks!</h1>
+        <p>
+            I try to get back to messages as quickly as possible.
+        </p>
+        <p>
+            In the meantime, checkout my <a href="{% url "blog-home" %}">blog</a> or hit me up on social media here:
+        </p>
+        <p class="text-center contact-links">
+            <a href="https://twitter.com/patsweet"><i class="fi-social-twitter"></i> Twitter</a> | <a href="http://www.linkedin.com/in/patsweet"> <i class="fi-social-linkedin"></i> LinkedIn</a> | <a href="https://www.facebook.com/patmsweet"> <i class="fi-social-facebook"></i> Facebook</a>
+        </p>
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}
