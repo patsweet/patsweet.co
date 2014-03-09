@@ -145,3 +145,11 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', '')
+
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': 'unix:/home/patsweet/memcached.sock'
+        }
+    }
