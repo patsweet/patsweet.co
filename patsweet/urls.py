@@ -12,13 +12,14 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # API Auth
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls',
+        namespace='rest_framework')),
     # Main Site
     url(r'^$', HomePage.as_view(), name='home'),
     url(r'^blog/', include('blog.urls')),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name="about"),
+    url(r'^about/$', TemplateView.as_view(template_name='about.html'),
+        name="about"),
     url(r'^contact/', include('contact_form.urls')),
     # Family Tree Project
     url(r'^family/', include('genealogy.urls')),
-
 )
