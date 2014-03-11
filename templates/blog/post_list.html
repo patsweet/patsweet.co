@@ -1,6 +1,6 @@
 {% for post in posts %}
-<div class="row" data-equalizer>
-    <div class="large-3 columns" style="background:#d4d4d4;" data-equalizer-watch>
+<div class="row">
+    <div class="large-3 columns" style="background:#d4d4d4;">
         <span class="label">{{ post.pub_date }}</span>
         {% if post.category %}
         <p>
@@ -13,10 +13,13 @@
             </a>
         </p>
     </div>
-    <div class="large-9 columns" data-equalizer-watch>
+    <div class="large-9 columns">
         <div class="article">
-                <h2 style="line-height:1em"><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a> </h2>
-                {{ post.body|safe|truncatewords_html:100 }}
+            <h2 style="line-height:1em"><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a> </h2>
+            {{ post.body|safe|truncatewords_html:100 }}
+            {% ifnotequal post.body|truncatewords_html:100|length post.body|truncatewords_html:101|length %}
+               <a href="{{ post.get_absolute_url }}">Read More</a>
+            {% endifnotequal %}
         </div>
     </div>
 </div>
