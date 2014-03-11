@@ -1,1 +1,21 @@
-hello world
+{% extends "base.html" %}
+
+{% block maincontent %}
+<br>
+<div class="row">
+    <h2>Sweet Family Tree</h2>
+</div>
+{% endblock maincontent %}
+
+{% block extrajs %}
+<script>
+    $(function() {
+        $.getJSON('api/members')
+            .success(function(data){
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i]);
+                };
+            })
+    })
+</script>
+{% endblock extrajs %}
