@@ -1,0 +1,1 @@
+Finish registering on {{ site }}
