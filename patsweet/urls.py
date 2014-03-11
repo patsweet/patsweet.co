@@ -11,8 +11,6 @@ urlpatterns = patterns('',
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    # Account Management
-    url(r'^accounts/', include('registration.backends.default.urls')),
     # API Auth
     url(r'^api-auth/', include('rest_framework.urls',
         namespace='rest_framework')),

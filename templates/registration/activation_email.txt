@@ -1,9 +1,0 @@
-Thanks for registering at {{ site }}.
-
-You can activate your account by clicking here:
-{{ activation_key }}
-
-This activation code will expire in {{ expiration_days }} days.
-
-Thanks,
-Pat

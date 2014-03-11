@@ -77,14 +77,11 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'rest_framework',
-    'registration',
     # Custom Apps
     'blog',
     'genealogy',
 )
 
-# DJANGO-REGISTRATION
-ACCOUNT_ACTIVATION_DAYS = 7
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
