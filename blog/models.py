@@ -15,7 +15,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField('date published')
     published = models.BooleanField()
     created_on = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, limit_choices_to={'is_superuser': True})
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
 
     objects = models.Manager()
