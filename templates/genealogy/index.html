@@ -1,1 +1,17 @@
-hello world
+{% extends "base.html" %}
+
+{% block maincontent %}
+<br>
+<div class="row">
+    <h2>The whole darn family</h2>
+    {% for member in family %}
+        <div class="row">
+            <h4>{{ member.full_name }} <small>({{member.birthday|date:"D., N d, Y"|default:"n/a"}} - {{member.died_on|date:"D., N d, Y"|default:"n/a"}})</small></h4>
+        </div>
+    {% endfor %}
+</div>
+{% endblock maincontent %}
+
+{% block extrajs %}
+
+{% endblock extrajs %}

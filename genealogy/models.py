@@ -25,8 +25,15 @@ class FamilyMember(models.Model):
     mother = models.ForeignKey('self', blank=True, null=True, related_name='mother_to', limit_choices_to={'sex': 'f'})
     father = models.ForeignKey('self', blank=True, null=True, related_name='father_to', limit_choices_to={'sex': 'm'})
 
+    class Meta:
+        ordering = ['birthday', 'died_on']
+
     def __unicode__(self):
+        return self.full_name()
+
+    def full_name(self):
         if self.suffix:
             return "%s %s %s" % (self.first_name, self.last_name, self.get_suffix_display())
         else:
             return "%s %s" % (self.first_name, self.last_name)
+
