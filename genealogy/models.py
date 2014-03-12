@@ -32,8 +32,15 @@ class FamilyMember(models.Model):
         return self.full_name()
 
     def full_name(self):
-        if self.suffix:
-            return "%s %s %s" % (self.first_name, self.last_name, self.get_suffix_display())
+        if self.middle_name:
+            name = "%s %s %s" % (self.first_name, self.middle_name, self.last_name)
         else:
-            return "%s %s" % (self.first_name, self.last_name)
+            name = "%s %s" % (self.first_name, self.last_name)
+        if self.suffix:
+            return name + " " + self.get_suffix_display()
+        return name
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('family-detail', kwargs={'pk':self.id})
 

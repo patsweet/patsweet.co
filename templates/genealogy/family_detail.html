@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<div class="row">
+    <h1>{{ member.full_name }}</h1>
+    <p>
+        {{ member.full_name }} was born on {{ member.birthday|date:"l, F j, Y" }}.
+    </p>
+    <p>
+        {% if member.died_on %}
+            {{ member.first_name }} died on {{ member.died_on|date:"l, F j, Y" }} at {{ member.birthday|timesince:member.died_on }} old.
+        {% endif %}
+    </p>
+    <h3>Parents</h3>
+    <p>
+        <strong>Father: </strong> <a href="{{ member.father.get_absolute_url|default:"#" }}">{{ member.father.full_name|default:"n/a" }}</a>
+    </p>
+    <p>
+        <strong>Mother: </strong> <a href="{{ member.mother.get_absolute_url|default:"#" }}">{{ member.mother.full_name|default:"n/a" }}</a>
+    </p>
+    <h3>Children</h3>
+    <ul>
+        {% if member.father_to.all %}
+            {% for child in member.father_to.all %}
+                <li>
+                    <a href="{{ child.get_absolute_url }}">{{ child.full_name }}</a>
+                </li>
+            {% empty %}
+                <li>None</li>
+            {% endfor %}
+        {% else %}
+            {% for child in member.mother_to.all %}
+                <li>
+                    <a href="{{ child.get_absolute_url }}">{{ child.full_name }}</a>
+                </li>
+            {% empty %}
+                <li>None</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+{% endblock maincontent %}
