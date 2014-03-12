@@ -4,11 +4,37 @@
 <br>
 <div class="row">
     <h2>The whole darn family</h2>
-    {% for member in family %}
-        <div class="row">
-            <h4>{{ member.full_name }} <small>({{member.birthday|date:"D., N d, Y"|default:"n/a"}} - {{member.died_on|date:"D., N d, Y"|default:"n/a"}})</small></h4>
+    <div class="row">
+        {% for member in family %}
+        <div class="large-3 columns left">
+            <div class="panel">
+                <h4>
+                    <a href="{{ member.get_absolute_url }}">{{ member.full_name }}</a> <small>({{ member.birthday|date:"SHORT_DATE_FORMAT"|default:"n/a" }} - {{ member.died_on|date:"SHORT_DATE_FORMAT"|default:"n/a" }})</small>
+                </h4>
+                <strong>Children</strong>
+                <ul>
+                    {% if member.mother_to.all %}
+                        {% for child in member.mother_to.all %}
+                            <li>
+                                <a href="{{ child.get_absolute_url }}">{{ child.full_name }}</a>
+                            </li>
+                        {% empty %}
+                            <li>None</li>
+                        {% endfor %}
+                    {% else %}
+                        {% for child in member.father_to.all %}
+                            <li>
+                                <a href="{{ child.get_absolute_url }}">{{ child.full_name }}</a>
+                            </li>
+                        {% empty %}
+                            <li>None</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 <div class="pagination-centered">
     <ul class="pagination">

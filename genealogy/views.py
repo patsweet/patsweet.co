@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from .models import FamilyMember
 from .serializers import FamilyMemberSerializer
 from rest_framework import permissions
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
@@ -29,3 +29,9 @@ class FamilyList(ListView):
     template_name = "genealogy/index.html"
     context_object_name = "family"
     model = FamilyMember
+
+
+class FamilyDetail(DetailView):
+    template_name = "genealogy/family_detail.html"
+    model = FamilyMember
+    context_object_name = "member"
