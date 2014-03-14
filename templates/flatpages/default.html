@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ flatpage.title }}
+{% endblock title %}
+
+{% block maincontent %}
+<br>
+<div class = "row">
+    <div class="small-12 large-8 columns">
+        {{ flatpage.content }}
+    </div>
+    {% include 'blog/sidebar.html' %}
+</div>
+{% endblock maincontent %}
