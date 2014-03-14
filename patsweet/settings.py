@@ -39,6 +39,8 @@ REST_FRAMEWORK = {
     ]
 }
 
+SITE_ID = 1
+
 ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split()
 
 ADMINS = (
@@ -69,10 +71,12 @@ INSTALLED_APPS = (
     'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
     # Third-party Apps
     'south',
     'compressor',
