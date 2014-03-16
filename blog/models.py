@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 
 class PublishedPostManager(models.Manager):
@@ -28,7 +29,6 @@ class Post(models.Model):
         return self.headline
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('blog-post-detail', kwargs={'pk':self.id, 'slug': self.slug})
 
 
@@ -51,7 +51,6 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('blog-category-detail', kwargs={'pk':self.id, 'slug': self.slug})
 
     def published_posts(self):
