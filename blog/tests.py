@@ -1,8 +1,40 @@
 from django.test import TestCase
-from .models import Post
+from .models import Post, Category
 from django.utils import timezone
 from django.contrib.auth.models import User
 import datetime
+
+
+class BlogModelTestCase(TestCase):
+    def test_unicode(self):
+        post = Post(headline='Testing a headline')
+        self.assertEqual(str(post), 'Testing a headline')
+
+
+class CategoryModelTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create(
+            username='tester', password='tester',
+            first_name='Test', last_name='User',
+            email='test@example.com')
+        category = Category.objects.create(title='Hello World',
+            slug='hello-world')
+        Post.objects.create(
+            headline='Testing', body='Hello World!',
+            pub_date=timezone.now() - datetime.timedelta(minutes=5),
+            published=False, author=user, slug='testing', category=category)
+
+    def test_unicode(self):
+        category = Category(title='Hello World')
+        self.assertEqual(str(category), 'Hello World')
+
+    def test_get_published_related_posts(self):
+        category = Category.objects.get(title='Hello World')
+        posts = Post.objects.filter(category=category)
+        self.assertTrue(list(category.published_posts()) != list(posts))
+        posts.update(published=True, pub_date=timezone.now() - datetime.timedelta(days=1))
+        self.assertTrue(list(category.published_posts()) == list(posts))
+
 
 class BlogViewsTestCase(TestCase):
     def setUp(self):
