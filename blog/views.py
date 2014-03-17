@@ -4,6 +4,13 @@ from .models import Post, Category
 from .serializers import PostSerializer, CategorySerializer
 
 
+class CategoriesMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(CategoriesMixin, self).get_context_data(**kwargs)
+        context['categories'] = Category.with_count.all()
+        return context
+
+
 class PostViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
@@ -26,30 +33,20 @@ class HomePage(ListView):
     queryset = Post.published_posts.all()[:6]
 
 
-class CategoryDetail(DetailView):
+class CategoryDetail(CategoriesMixin, DetailView):
     template_name = "blog/category_detail.html"
     context_object_name = "category"
     model = Category
 
-    def get_context_data(self, **kwargs):
-        context = super(CategoryDetail, self).get_context_data(**kwargs)
-        context['categories'] = Category.with_count.all()
-        return context
 
-
-class PostList(ListView):
+class PostList(CategoriesMixin, ListView):
     paginate_by = 10
     template_name = "blog/index.html"
     context_object_name = "posts"
     queryset = Post.published_posts.all()
 
-    def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data(**kwargs)
-        context['categories'] = Category.with_count.all()
-        return context
 
-
-class PostDetail(DetailView):
+class PostDetail(CategoriesMixin, DetailView):
     template_name = "blog/post_detail.html"
     context_object_name = "post"
     model = Post
@@ -60,8 +57,3 @@ class PostDetail(DetailView):
         else:
             queryset = Post.published_posts.all()
         return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data(**kwargs)
-        context['categories'] = Category.with_count.all()
-        return context
