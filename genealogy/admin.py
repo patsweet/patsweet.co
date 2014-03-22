@@ -8,4 +8,10 @@ class FamilyMemberAdmin(admin.ModelAdmin):
     date_hierarchy = 'birthday'
     raw_id_fields = ('mother', 'father')
 
+    class Media:
+        js = [
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/TinyMCEAdmin.js'
+        ]
+
 admin.site.register(FamilyMember, FamilyMemberAdmin)
