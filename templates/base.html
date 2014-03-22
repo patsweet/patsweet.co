@@ -56,6 +56,10 @@
                         <li><a href="{% url 'blog-home' %}">blog</a></li>
                         <li><a href="{% url 'about' %}">about</a></li>
                         <li><a href="{% url 'contact_form' %}">contact</a></li>
+                        {% if request.user.is_staff %}
+                            <li><a href="{% url 'family-index' %}">family</a></li>
+                            <li><a href="{% url 'admin:index' %}">admin</a></li>
+                        {% endif %}
                     </ul>
                 </section>
             </nav>
@@ -74,7 +78,7 @@
                         </div>
                         <div class="large-4 columns text-center">
                             <p class="text=center">
-                                <a href="{% url 'blog-home' %}">blog</a> | <a href="{% url 'about' %}">about</a> | <a href="{% url 'contact_form' %}">contact</a>
+                                <a href="{% url 'blog-home' %}">blog</a> | <a href="{% url 'about' %}">about</a> | <a href="{% url 'contact_form' %}">contact</a> | <a href="{% url 'admin:index' %}">admin</a>{% if request.user.is_staff %} | <a href="{% url 'family-index' %}">family</a>{% endif %}
                             </p>
                         </div>
                         <div class="large-4 columns">
