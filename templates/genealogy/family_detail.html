@@ -60,7 +60,7 @@
     <div class="small-12 medium-6 large-8 columns">
         <h3>Notes</h3>
         {% if member.notes %}
-            {{ member.notes }}
+            {{ member.notes|safe }}
         {% else %}
             <p>No notes provided</p>
         {% endif %}
