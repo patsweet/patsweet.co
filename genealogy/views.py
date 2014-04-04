@@ -31,6 +31,11 @@ class FamilyList(ListView):
     model = FamilyMember
 
 
+class FamilyTreeList(FamilyList):
+    paginate_by = None
+    template_name = "genealogy/tree.html"
+
+
 class FamilyDetail(DetailView):
     template_name = "genealogy/family_detail.html"
     model = FamilyMember
