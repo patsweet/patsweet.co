@@ -31,9 +31,10 @@ class FamilyList(ListView):
     model = FamilyMember
 
 
-class FamilyTreeList(FamilyList):
-    paginate_by = None
+class FamilyTreeList(ListView):
     template_name = "genealogy/tree.html"
+    context_object_name = "family"
+    queryset = FamilyMember.objects.all().order_by('pk')
 
 
 class FamilyDetail(DetailView):

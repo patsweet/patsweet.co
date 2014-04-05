@@ -1,44 +1,122 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+
+{% block extrastyles %}
+  <style>
+
+    .node {
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    .link {
+      stroke: #999;
+      stroke-opacity: .6;
+    }
+
+  </style>
+{% endblock extrastyles %}
+
 {% block maincontent %}
+
+
 <br>
 <div class="row">
   <div class="small-12 columns">
-    <canvas id="springydemo" width="920px" height="600px" />
+    <h1>The Family Web <small>hover over a node for a name</small></h1>
+    <hr>
+    <div id="family-tree" style="width: 100%; height: 700px;"></div>
+    <hr>
   </div>
 </div>
 {% endblock maincontent %}
 
 {% block extrajs %}
-  <script type="text/javascript" charset="utf-8" src="{% static "springy/springy.js" %}"></script>
-  <script type="text/javascript" charset="utf-8" src="{% static "springy/springyui.js" %}"></script>
-  <script type="text/javascript" charset="utf-8">
-    var graphJSON = {
-      "nodes": [
-        {% for familymember in family %}
-          "{{ familymember.full_name }}"{% if not forloop.last %},{% endif %}
-        {% endfor %}
-      ],
-      "edges": [
-        {% for familymember in family %}
-          {% if familymember.father %}
-          ["{{ familymember.father.full_name }}", "{{ familymember.full_name }}"],
-          {% endif %}
-          {% if familymember.mother %}
-            ["{{ familymember.mother.full_name }}", "{{ familymember.full_name }}"],
-          {% endif %}
-        {% endfor %}
-      ]
-    };
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+</script>
+<script type="text/javascript" charset="utf-8">
+var graph = {
+  'nodes': [
+    {% for member in family %}
+      {'id': '{{ member.id }}', 'name': '{{ member.full_name }}', 'group': '{{ member.last_name }}' }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ],
+  'links': [
+    {% for member in family %}
+      {% if member.father and member.mother %}
+        {"source":{{ member.father.pk|add:'-1' }}, "target":{{ member.pk|add:'-1' }}, "value":2},
+        {"source":{{ member.mother.pk|add:'-1' }}, "target":{{ member.pk|add:'-1' }}, "value":2}{% if not forloop.last %},{% endif %}
+      {% elif member.father and not member.mother %}
+        {"source":{{ member.father.pk|add:'-1' }}, "target":{{ member.pk|add:'-1' }}, "value":2}{% if not forloop.last %},{% endif %}
+      {% elif not member.father and member.mother %}
+        {"source":{{ member.mother.pk|add:'-1' }}, "target":{{ member.pk|add:'-1' }}, "value":2}{% if not forloop.last %},{% endif %}
+      {% endif %}
+    {% endfor %}
+  ]
+};
+$(function() {
 
-    jQuery(function(){
-      var graph = new Springy.Graph();
-      graph.loadJSON(graphJSON);
+  var width = $("#family-tree").width(),
+      height = 700;
 
-      var springy = jQuery('#springydemo').springy({
-        graph: graph
-      });
-    });
+  var color = d3.scale.category20();
 
-  </script>
+  var force = d3.layout.force()
+      .charge(-120)
+      .linkDistance(75)
+      .size([width, height]);
+
+  var svg = d3.select("#family-tree").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .attr("marker-end", "url(#end)")
+      .style("stroke-width", 2);
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 8)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+
+});
+</script>
 {% endblock extrajs %}

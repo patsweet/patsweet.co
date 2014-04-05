@@ -3,7 +3,7 @@
 {% block maincontent %}
 <br>
 <div class="row">
-    <h2>The whole darn family</h2>
+    <h2>The whole darn family <small><a href="{% url 'family-tree' %}">view web</a></small></h2>
     <div class="row">
         {% for member in family %}
         <div class="large-3 columns left">
