@@ -31,23 +31,23 @@
     <div class="row">
         <div class="small-12 columns">
             <h3>Latest blog posts</h3>
-            <ul class="large-block-grid-3 small-12 columns">
+            <div class="small-12 columns">
                 {% for post in posts %}
-                    <li>
+                    <div>
                         <div class="panel">
                             <span class="label">{{ post.pub_date }}</span>
                             {% if post.category %}
                                 <span class="secondary label">{{ post.category.title }}</span>
                             {% endif %}
                             <h4><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h4>
-                            {{ post.body|safe|truncatewords_html:20 }}
-                            {% ifnotequal post.body|truncatewords_html:20|length post.body|truncatewords_html:21|length %}
+                            {{ post.body|safe|truncatewords_html:30 }}
+                            {% ifnotequal post.body|truncatewords_html:30|length post.body|truncatewords_html:31|length %}
                                 <a href="{{ post.get_absolute_url }}">Read More</a>
                             {% endifnotequal %}
                         </div>
-                    </li>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
             <h4 class="right"><a href="{% url 'blog-home' %}">More blog posts</a></h4>
         </div>
     </div>
